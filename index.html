@@ -3,8 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Olga & Oriol — Madrecdotas</title>
-<link rel="icon" href="logo.png" type="image/png">
+<title>Las Madrecdotas — Olga & Oriol</title>
 <style>
   :root{
     --bg:#f6f4f2;
@@ -12,61 +11,47 @@
     --muted:#6c7a72;
     --primary:#2f6f5e;
     --pill:#e6efe9;
-    --success-bg:#e8f7ec;
-    --success:#1c7c3a;
     --border:#e7e3dd;
     --shadow: 0 6px 16px rgba(0,0,0,.06);
-    --radius:14px;
-
-    --uri:#2e7d32;
-    --olga:#2f6f8a;
-    --danger:#c0392b;
-    --toast:#1f2a27;
+    --radius:16px;
   }
   *{box-sizing:border-box}
   html,body{margin:0;background:var(--bg);color:#2a2a2a;font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif}
-  .wrap{max-width:980px;margin:0 auto;padding:20px 16px 28px}
+  .wrap{max-width:980px;margin:0 auto;padding:20px 16px 36px}
 
-  /* Header */
-  header{display:flex;flex-direction:column;align-items:center;gap:12px;margin-top:4px;margin-bottom:10px}
-  .logo{height:72px; width:auto; display:block}
+  header{display:flex;flex-direction:column;align-items:center;gap:12px;margin-top:4px;margin-bottom:6px}
+  .logo{height:64px;width:auto;display:block}
 
-  /* Controls */
-  .toolbar{display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap;margin:6px 0 8px}
-  .btn{border:none;border-radius:999px;padding:10px 14px;font-weight:700;cursor:pointer}
-  .btn.primary{background:var(--primary);color:#fff}
-  .btn.ghost{background:#fff;border:1px solid var(--border)}
-  .btn:disabled{opacity:.6;cursor:default}
-
-  /* Progress */
-  .progress{width:100%;max-width:560px;margin:0 auto 10px}
-  .progress .label{display:flex;justify-content:space-between; font-size:12px; color:var(--muted); margin:8px 4px}
+  /* progress */
+  .progress{width:100%;max-width:560px;margin:0 auto 2px}
+  .progress .label{display:flex;justify-content:center; gap:10px; font-size:13px; color:var(--muted); margin:6px 4px}
   .bar{height:8px;background:#e9ecec;border-radius:999px;overflow:hidden}
   .bar > span{display:block;height:100%;width:0;background: color-mix(in srgb, var(--primary) 45%, white); border-radius:999px; transition:width .35s ease}
 
-  /* Flip card */
-  .stage{display:grid;place-items:center;margin-top:6px}
-  .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);width:min(780px,100%);min-height:220px;perspective:1200px}
-  .flip{position:relative;width:100%;min-height:220px;transform-style:preserve-3d;transition:transform .5s ease;cursor:pointer}
-  .flip.is-back{transform:rotateY(180deg)}
-  .face{position:absolute;inset:0;padding:18px 18px 20px;display:grid;align-content:center;gap:12px;backface-visibility:hidden;border-radius:var(--radius)}
-  .front{background:#fff}
-  .back{background:#fff;transform:rotateY(180deg)}
-  .meta{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;text-align:center}
-  .text{font-size:18px;line-height:1.45;text-align:center;color:#2a2a2a}
-  .reveal{display:flex;justify-content:center}
-  .pill{background:var(--pill); padding:8px 12px; border-radius:999px; font-weight:800; letter-spacing:.3px; display:inline-flex; align-items:center; gap:10px; box-shadow:var(--shadow); color:#1a1a1a}
-  .author{font-size:20px;color:#2e4b3d;font-weight:800;text-align:center}
+  /* controls */
+  .controls{display:flex;gap:12px;justify-content:center;align-items:center;margin:10px 0 14px;flex-wrap:wrap}
+  .btn{border:1px solid var(--border);background:#fff;border-radius:999px;padding:10px 14px;cursor:pointer;box-shadow:var(--shadow);min-width:44px;display:inline-flex;align-items:center;justify-content:center;font-weight:700}
+  .btn.icon{padding:10px 12px; min-width:auto}
+  .btn.primary{background:var(--primary);color:#fff;border-color:transparent}
+  .btn:hover{filter:brightness(.98)}
 
-  /* Footer */
-  footer{margin-top:18px;text-align:center;color:#2f3b36}
+  /* card */
+  .stage{display:flex;justify-content:center}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px;max-width:720px;width:100%;min-height:220px;position:relative;perspective:1000px}
+  .inner{position:relative; width:100%; min-height:220px; transform-style:preserve-3d; transition:transform .5s ease}
+  .card.flipped .inner{transform:rotateY(180deg)}
+  .face{position:absolute; inset:0; backface-visibility:hidden; display:flex; flex-direction:column; justify-content:center; align-items:center; padding:8px 10px}
+  .face h1{margin:0 0 10px; font-size:22px; color:#223d31}
+  .face p{margin:0; font-size:18px; line-height:1.45; text-align:center}
+  .face .hint{margin-top:16px; background: color-mix(in srgb, var(--primary) 12%, white); border:1px solid color-mix(in srgb, var(--primary) 22%, white); padding:10px 14px; border-radius:999px; font-weight:800}
+  .back{transform:rotateY(180deg)}
+  .meta{position:absolute; top:10px; left:14px; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted)}
 
-  /* Toast */
-  #toast{
-    position:fixed;bottom:22px;left:50%;transform:translateX(-50%);
-    background:var(--toast);color:#fff;padding:8px 14px;border-radius:18px;
-    font-size:12px;line-height:1.25;max-width:90%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-    display:none;z-index:1200;box-shadow:var(--shadow)
+  footer{margin-top:22px;text-align:center;color:#2f3b36}
+
+  @media(max-width:560px){
+    .face p{font-size:17px}
+    .logo{height:56px}
   }
 </style>
 </head>
@@ -75,160 +60,108 @@
     <header>
       <img src="logo.png" alt="Olga & Oriol — 04.10.2025" class="logo" />
       <div class="progress">
-        <div class="label"><span id="progressText">0 de 0 mostradas</span><span id="hint">Toca la tarjeta para ver a quién pertenece</span></div>
-        <div class="bar"><span id="progressBar"></span></div>
-      </div>
-      <div class="toolbar">
-        <button id="btnPrev" class="btn ghost" type="button" aria-label="Anterior">⟵ Anterior</button>
-        <button id="btnNext" class="btn primary" type="button" aria-label="Siguiente">Siguiente ⟶</button>
-        <button id="btnShuffle" class="btn ghost" type="button" aria-label="Mezclar">🔀 Mezclar</button>
-        <button id="btnReset" class="btn ghost" type="button" aria-label="Reiniciar">Reset</button>
+        <div class="label"><span id="counter">0/0</span></div>
+        <div class="bar"><span id="bar"></span></div>
       </div>
     </header>
 
-    <main class="stage" aria-live="polite">
-      <article class="card" id="card">
-        <div class="flip" id="flip">
-          <section class="face front">
+    <div class="controls">
+      <button class="btn icon" id="prev" title="Anterior">◀</button>
+      <button class="btn primary" id="next" title="Siguiente">Siguiente →</button>
+      <button class="btn icon" id="shuffle" title="Mezclar">🔀</button>
+    </div>
+
+    <div class="stage">
+      <div class="card" id="card">
+        <div class="inner">
+          <div class="face front">
             <div class="meta">Madrecdota · Frente</div>
-            <div class="text" id="frontText">Pulsa "Siguiente" para empezar.</div>
-            <div class="reveal"><span class="pill">Tócame para girar ↻</span></div>
-          </section>
-          <section class="face back">
+            <p id="quote">—</p>
+            <div class="hint" id="flipFront">↻ Girar</div>
+          </div>
+          <div class="face back">
             <div class="meta">Autor/a</div>
-            <div class="author" id="author">—</div>
-            <div class="reveal"><span class="pill">Tócame para volver ↺</span></div>
-          </section>
+            <h1 id="author">—</h1>
+            <div class="hint" id="flipBack">↺ Volver</div>
+          </div>
         </div>
-      </article>
-    </main>
+      </div>
+    </div>
 
     <footer>Hecho con ❤️ para Olga &amp; Oriol.</footer>
   </div>
 
-  <div id="toast" role="status" aria-live="polite"></div>
-
 <script>
 (function(){
-  // Anécdotas reescritas y normalizadas a partir del documento compartido.
-  // Cada entrada: { text, author }
-  const ANECDOTES = [
-    // Jessica (1)
-    { author:"Jessica", text:"Viendo 'Destino Final' en familia, mi padre cambió justo a la escena de la gimnasta. Mi padre, mi hermano y yo nos reímos del absurdo… hasta que vimos a mi madre llorando. Nos dejó helados y nos reímos de nervios, pero luego le pedimos perdón." },
-
-    // Roger (3)
-    { author:"Roger", text:"Mi madre se apuntó a aromaterapia. Ahora tiene una destiladora en casa y parece un laboratorio… pero huele a romero, no a metanfetamina." },
-    { author:"Roger", text:"Con cuatro años quise esquiar solo. Le pedí a mi madre que me soltara. Me soltó, me caí al instante y, llorando, le grité: “¡¿Por qué me sueltas?!”. " },
-    { author:"Roger", text:"De pequeño me inventé un idioma. Mi familia me iba preguntando palabras y yo improvisaba. Mi madre preguntó cómo se decía “bruja”… y dije su nombre." },
-
-    // Javi (3)
-    { author:"Javi", text:"En un vuelo a Nueva York la azafata le dijo “welcome” a mi madre, y ella contestó con un “welcome” segurísimo. Estuvimos todo el viaje saludando a desconocidos con un “welcome” random." },
-    { author:"Javi", text:"Haciendo limpieza, una cucaracha “muerta” acabó en el recogedor. De repente echó a correr y mi madre, nerviosa, gritó: “¡Se ha corrido por todo el recogedor!”. Risas y asco a partes iguales." },
-    { author:"Javi", text:"En las comidas sabemos que si la provocas mucho, te cae un vaso de agua. Un día un consuegro soltó comentarios machistas… y mi madre le lanzó el vaso en toda la cara. Aplauso unánime." },
-
-    // Gemma (1)
-    { author:"Gemma", text:"Por teléfono siempre nos confunden: dicen que mi madre y yo tenemos la misma voz. Mi abuela y sus amigas llevan años equivocándose." },
-
-    // Silvia (3)
-    { author:"Silvia", text:"El Día de los Inocentes la llamé desde el aeropuerto: “He perdido el pasaporte. Solo puedo volver con un pasaporte exprés carísimo”. Tras la bronca… aceptó pagarlo. Luego le dije: “Inocente”. " },
-    { author:"Silvia", text:"Mi madre es tan ordenada que los álbumes de fotos tienen etiquetas y un índice para buscar por año y evento. Es un archivo histórico en casa." },
-    { author:"Silvia", text:"En el festival de la ESO mis padres grabaron toda la coreografía… a una chica que no era yo. El vídeo familiar es de una desconocida dando el 100%." },
-
-    // Bela (3)
-    { author:"Bela", text:"“La Castaña”: de pequeña, mi tío asustaba a mi madre diciendo: “¡Que viene la Castaña!”. No era nadie real, pero le daba pánico." },
-    { author:"Bela", text:"Durante años en casa dijimos “triquismiquis” en vez de “tiquismiquis”, porque mi madre estaba convencida de que era así." },
-    { author:"Bela", text:"Un día alguien dijo “corramos un estúpido velo” en lugar de “tupido”. Desde entonces quedó adoptado en la familia." },
-
-    // Maria (3)
-    { author:"Maria", text:"De pequeña, mi madre me hacía jugar a “La crítica”: paseábamos y comentábamos a los peor vestidos. Hoy me río, pero menuda escuela de estilismo." },
-    { author:"Maria", text:"Cuando me lié con mi crush de infancia, llamé a mi madre nada más cerrar la puerta. Jugamos a “¿Quién es quién?” hasta que adivinó quién era." },
-    { author:"Maria", text:"En pandemia cocinamos arroz con leche para mi padre. Nos quedó malísimo y él estuvo una semana pachucho. Desde entonces, postres… mejor comprados." }
+  // Anecdotas (revisadas y pulidas). Añade las tuyas aquí.
+  const ITEMS = [
+    { text:"Haciendo limpieza, una cucaracha “muerta” acabó en el recogedor. De repente echó a correr y mi madre, nerviosa, gritó: “¡Se ha corrido por todo el recogedor!”. Risas y asco a partes iguales.", author:"Javi" },
+    { text:"De pequeña confundí colonia con quitaesmalte y regué el salón con el bote. Mi madre dijo muy seria: “Huele a limpieza profunda”.", author:"Olga" },
+    { text:"Mi madre tiene tres alarmas para ‘regresar a casa’. A la tercera, siempre dice: “Ahora sí, me voy”. Dos horas después seguimos allí.", author:"Uri" },
+    { text:"En una receta: “Añade un chorrito”. Pregunté cuánto es un chorrito. Mi madre: “Lo justo para que no me juzgue tu abuela”.", author:"Andrea" },
+    { text:"Poniendo una foto familiar, mi madre: “Pon la que salgo peor, así os lucís vosotros”. La dejó de perfil durante meses.", author:"Núria" },
+    { text:"“No grites que me asustas”, me gritó mi madre desde la otra habitación.", author:"Javi" },
+    { text:"Cada vez que preguntan por la edad: “Veinticinco… con experiencia”.", author:"Mar" }
   ];
 
-  // Estado
-  let order = [];
-  let index = -1;
-  const flip = document.getElementById('flip');
-  const frontText = document.getElementById('frontText');
-  const author = document.getElementById('author');
-  const progressText = document.getElementById('progressText');
-  const progressBar = document.getElementById('progressBar');
-  const toast = document.getElementById('toast');
+  let index = 0;
+  const seen = new Set(); // para progreso de mostradas
 
-  // Controles
-  const btnPrev = document.getElementById('btnPrev');
-  const btnNext = document.getElementById('btnNext');
-  const btnShuffle = document.getElementById('btnShuffle');
-  const btnReset = document.getElementById('btnReset');
+  const $ = (q)=>document.querySelector(q);
+  const card = $("#card");
+  const quote = $("#quote");
+  const author = $("#author");
+  const counter = $("#counter");
+  const bar = $("#bar");
 
-  function showToast(msg){
-    toast.textContent = msg;
-    toast.style.display = 'block';
-    clearTimeout(showToast._t);
-    showToast._t = setTimeout(()=>{ toast.style.display='none'; }, 1600);
+  function updateCounter(){
+    const shown = seen.size;
+    const total = ITEMS.length;
+    counter.textContent = `${Math.min(shown, total)}/${total}`;
+    bar.style.width = `${(shown/total)*100}%`;
   }
 
-  function updateHUD(){
-    const shown = Math.max(0, Math.min(ANECDOTES.length, index+1));
-    progressText.textContent = `${shown} de ${ANECDOTES.length} mostradas`;
-    progressBar.style.width = `${(shown/ANECDOTES.length)*100}%`;
-    btnPrev.disabled = (index<=0);
-    btnNext.disabled = (index>=order.length-1);
-  }
-
-  function shuffle(){
-    order = [...ANECDOTES.keys()];
-    for(let i=order.length-1;i>0;i--){
-      const j = Math.floor(Math.random()*(i+1));
-      [order[i],order[j]] = [order[j],order[i]];
-    }
-    index = -1;
-    updateHUD();
-  }
-
-  function setCard(a){
-    // reset cara frontal
-    flip.classList.remove('is-back');
-    frontText.textContent = a.text;
-    author.textContent = a.author;
+  function render(i){
+    const item = ITEMS[i];
+    if(!item) return;
+    quote.textContent = item.text;
+    author.textContent = item.author;
+    card.classList.remove("flipped");
+    seen.add(i);
+    updateCounter();
   }
 
   function next(){
-    if(index < order.length-1){
-      index++;
-      setCard(ANECDOTES[order[index]]);
-      updateHUD();
-    }else{
-      showToast('Has llegado al final. Mezcla o reinicia.');
-    }
+    index = (index + 1) % ITEMS.length;
+    render(index);
   }
-
   function prev(){
-    if(index > 0){
-      index--;
-      setCard(ANECDOTES[order[index]]);
-      updateHUD();
-    }
+    index = (index - 1 + ITEMS.length) % ITEMS.length;
+    render(index);
   }
-
-  function resetAll(){
-    shuffle();
-    next();
-    showToast('Reiniciado');
+  function shuffle(){
+    index = Math.floor(Math.random() * ITEMS.length);
+    render(index);
   }
 
   // Eventos
-  flip.addEventListener('click', ()=>{
-    flip.classList.toggle('is-back');
-  });
-  btnNext.addEventListener('click', next);
-  btnPrev.addEventListener('click', prev);
-  btnShuffle.addEventListener('click', ()=>{ shuffle(); showToast('Orden mezclado'); });
-  btnReset.addEventListener('click', resetAll);
+  $("#next").addEventListener("click", next);
+  $("#prev").addEventListener("click", prev);
+  $("#shuffle").addEventListener("click", shuffle);
 
-  // Inicio
-  shuffle();
-  next();
-})();</script>
+  $("#flipFront").addEventListener("click", ()=>card.classList.add("flipped"));
+  $("#flipBack").addEventListener("click", ()=>card.classList.remove("flipped"));
+  card.addEventListener("click", (e)=>{
+    // si pulsa en zonas vacías de la tarjeta, también girar
+    if(e.target.classList.contains('face') || e.target.id==='card'){ 
+      card.classList.toggle("flipped");
+    }
+  });
+
+  // init
+  updateCounter();
+  render(index);
+})();
+</script>
 </body>
 </html>
