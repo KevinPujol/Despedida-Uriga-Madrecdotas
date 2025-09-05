@@ -77,11 +77,95 @@
 <script>
 (function(){
   const anecdotes = [
-    { t: "La primera y única vez que mi madre llevó un barco, enredó la cuerda de esquiar en la hélice. Nos quedamos varados en alta mar y tuvimos que pedir un cuchillo a otra embarcación.", a: "Kevin" },
-    { t: "De niños, una amiga de mi madre le pidió recoger a su hijo y llevarlo a casa. En el trayecto se dio cuenta de que se lo había olvidado. Volvimos, y estaba acurrucado en las escaleras esperando.", a: "Kevin" },
-    { t: "Mi madre siempre ha sido la más dura y con más sentido común. Una vez metieron a mi primo en la cárcel, y fue ella quien fue a recogerlo para echarle la bronca. Otra vez, en Mallorca, plantó cara a unos turistas borrachos que molestaban y nos rescató.", a: "Kevin" },
-    { t: "Mi madre salió en una película de Berlanga Junior que se estrenó en cines e interactuó con el actor que hacía de Amador en *La que se avecina*.", a: "Voro" }
-  ];
+  {
+    "t": "Una tarde, mi padre hacía zapping y puso una película de Destino Final. Coincidió con la escena de la gimnasta que muere de forma absurda. Mi padre, mi hermano y yo nos reímos, pero mi madre lloraba, impactada. Entonces nos reímos todavía más... ¡pero de ella! 😂",
+    "a": "Jessica"
+  },
+  {
+    "t": "Mi madre se apuntó a un curso de aromaterapia. Ahora tenemos una destiladora y hace esencias en casa. Parece un laboratorio de metanfetaminas.",
+    "a": "Roger"
+  },
+  {
+    "t": "A los 4 años fui a esquiar con mi madre. Le pedí que me soltara porque podía hacerlo solo. En cuanto me soltó, me caí de culo y, llorando, le grité: «¡¿Por qué me sueltas?!».",
+    "a": "Roger"
+  },
+  {
+    "t": "De pequeño inventé un idioma y mi familia me pedía traducciones. Cuando preguntaron cómo se decía 'bruja', respondí con el nombre de mi madre.",
+    "a": "Roger"
+  },
+  {
+    "t": "En un viaje familiar a Nueva York, al entrar en el avión, una azafata saludó a mi madre con un 'welcome'. Ella respondió muy segura: 'welcome'. Durante todo el viaje mi hermano y yo saludamos así.",
+    "a": "Javi"
+  },
+  {
+    "t": "Limpiando un trastero, una cucaracha 'muerta' empezó a correr. Mi madre gritó: «¡Se ha corrido por todo el recogedor!». Nos reímos hasta llorar.",
+    "a": "Javi"
+  },
+  {
+    "t": "En casa sabíamos que si molestábamos demasiado a mi madre en la mesa podía tirar un vaso de agua. Lo que no sabía el marido de la madrastra de mi hermano, que pasó la comida con comentarios machistas. Al final mi madre le tiró el agua a la cara. Escena digna de Cuéntame. 😂",
+    "a": "Javi"
+  },
+  {
+    "t": "Siempre nos confunden por teléfono porque mi madre y yo tenemos la misma voz. Tanto mi abuela como sus amigas siempre nos confundían. 😂",
+    "a": "Gemma"
+  },
+  {
+    "t": "Volví de un viaje el Día de los Inocentes. Llamé a mi madre diciendo que había perdido el pasaporte y que necesitaba pagar uno exprés carísimo. Tras una bronca enorme, aceptó pagarlo.",
+    "a": "Silvia"
+  },
+  {
+    "t": "Es tan ordenada que los álbumes de fotos tienen etiquetas y hasta un índice para consultar el año y evento de cada álbum.",
+    "a": "Silvia"
+  },
+  {
+    "t": "En la ESO hice aerobic y en el festival final mis padres me grabaron... ¡pero a otra chica! 😂",
+    "a": "Silvia"
+  },
+  {
+    "t": "De niña, mi tío asustaba a mi madre diciendo: «¡Que viene la Castaña!». No era real, pero a ella le daba muchísimo miedo.",
+    "a": "Bela"
+  },
+  {
+    "t": "Hasta hace poco, en mi casa todos decíamos 'triquismiquis' porque mi madre pensaba que era correcto.",
+    "a": "Bela"
+  },
+  {
+    "t": "Un día, entre bromas, alguien dijo 'corramos un estúpido velo' en lugar de 'tupido velo'. Desde entonces, toda la familia lo dice así.",
+    "a": "Bela"
+  },
+  {
+    "t": "Cuando era pequeña, mi madre me hacía jugar a 'la crítica': íbamos por la calle criticando a la gente mal vestida.",
+    "a": "Maria"
+  },
+  {
+    "t": "Cuando me lié con mi crush de infancia, en cuanto se fue lo llamé y jugué con mi madre al 'Quién es quién' para que adivinara quién era.",
+    "a": "Maria"
+  },
+  {
+    "t": "En pandemia cocinamos juntas arroz con leche, el postre favorito de mi padre. Nos salió tan mal que estuvo una semana enfermo.",
+    "a": "Maria"
+  },
+  {
+    "t": "La primera y única vez que mi madre llevó un barco, enredó la cuerda de esquiar en la hélice. Nos quedamos varados en alta mar y tuvimos que pedir un cuchillo a otra embarcación.",
+    "a": "Kevin"
+  },
+  {
+    "t": "Una amiga le pidió que recogiera a su hijo y lo llevara a casa. En el trayecto mi madre se dio cuenta de que se lo había dejado. Volvimos y estaba acurrucado en las escaleras esperando a su madre.",
+    "a": "Kevin"
+  },
+  {
+    "t": "Mi madre siempre ha sido la más dura de la familia. Una vez metieron a mi primo en la cárcel y fue ella la que fue a recogerlo... ¡y a echarle la bronca! En Mallorca, unos guiris borrachos molestaban en el hotel y también fue ella quien les plantó cara para rescatarnos.",
+    "a": "Kevin"
+  },
+  {
+    "t": "Mi madre salió en una película de Berlanga Jr. que se estrenó en el cine e interactuó con el actor que hacía de Amador en *La que se avecina*.",
+    "a": "Voro"
+  },
+  {
+    "t": "Cuando vemos la tele y salen políticos del PP o juega el Real Madrid con Vinícius, yo siempre pico a mi madre. Ella empieza con “estos cabrones, este tío…” y yo le insisto: “¡Dilo, dilo, dilo… hijos de puta!”.",
+    "a": "Àlex"
+  }
+];
 
   let idx = 0;
   let flipped = false;
