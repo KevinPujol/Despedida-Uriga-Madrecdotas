@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Las Madrecdotas — Olga & Oriol</title>
+<title>Madrecdotas — Olga & Oriol</title>
 <style>
   :root{
     --bg:#f6f4f2;
@@ -17,75 +17,68 @@
   }
   *{box-sizing:border-box}
   html,body{margin:0;background:var(--bg);color:#2a2a2a;font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif}
-  .wrap{max-width:980px;margin:0 auto;padding:20px 16px 36px}
+  .wrap{max-width:880px;margin:0 auto;padding:20px 16px 28px}
 
-  header{display:flex;flex-direction:column;align-items:center;gap:12px;margin-top:4px;margin-bottom:6px}
-  .logo{height:64px;width:auto;display:block}
+  /* Header */
+  header{display:flex;flex-direction:column;align-items:center;gap:12px;margin-top:4px;margin-bottom:8px}
+  .logo{height:88px; width:auto; display:block}
 
-  /* progress */
-  .progress{width:100%;max-width:560px;margin:0 auto 2px}
-  .progress .label{display:flex;justify-content:center; gap:10px; font-size:13px; color:var(--muted); margin:6px 4px}
+  /* Progress */
+  .progress{width:100%;max-width:560px;margin:0 auto 10px}
+  .progress .label{display:flex;justify-content:center; gap:14px; font-size:13px; color:var(--muted); margin:8px 4px}
   .bar{height:8px;background:#e9ecec;border-radius:999px;overflow:hidden}
   .bar > span{display:block;height:100%;width:0;background: color-mix(in srgb, var(--primary) 45%, white); border-radius:999px; transition:width .35s ease}
 
-  /* controls */
-  .controls{display:flex;gap:12px;justify-content:center;align-items:center;margin:10px 0 14px;flex-wrap:wrap}
-  .btn{border:1px solid var(--border);background:#fff;border-radius:999px;padding:10px 14px;cursor:pointer;box-shadow:var(--shadow);min-width:44px;display:inline-flex;align-items:center;justify-content:center;font-weight:700}
-  .btn.icon{padding:10px 12px; min-width:auto}
-  .btn.primary{background:var(--primary);color:#fff;border-color:transparent}
-  .btn:hover{filter:brightness(.98)}
+  /* Controls */
+  .controls{display:flex;gap:12px;justify-content:center;margin:14px 0 16px; flex-wrap:wrap}
+  .btn{border:none;border-radius:999px;padding:12px 18px;font-weight:800;cursor:pointer;box-shadow:var(--shadow); background:#fff; border:1px solid var(--border);}
+  .btn.primary{background:var(--primary); color:#fff; border-color:transparent}
+  .btn.icon{padding:12px 14px}
+  .btn:disabled{opacity:.6;cursor:not-allowed}
 
-  /* card */
-  .stage{display:flex;justify-content:center}
-  .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px;max-width:720px;width:100%;min-height:220px;position:relative;perspective:1000px}
-  .inner{position:relative; width:100%; min-height:220px; transform-style:preserve-3d; transition:transform .5s ease}
-  .card.flipped .inner{transform:rotateY(180deg)}
-  .face{position:absolute; inset:0; backface-visibility:hidden; display:flex; flex-direction:column; justify-content:center; align-items:center; padding:8px 10px}
-  .face h1{margin:0 0 10px; font-size:22px; color:#223d31}
-  .face p{margin:0; font-size:18px; line-height:1.45; text-align:center}
-  .face .hint{margin-top:16px; background: color-mix(in srgb, var(--primary) 12%, white); border:1px solid color-mix(in srgb, var(--primary) 22%, white); padding:10px 14px; border-radius:999px; font-weight:800}
+  /* Card */
+  .card{position:relative;perspective:1200px;margin:0 auto;max-width:720px;min-height:260px}
+  .face{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px 22px 26px;position:absolute;inset:0;backface-visibility:hidden;transform-style:preserve-3d;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px}
   .back{transform:rotateY(180deg)}
-  .meta{position:absolute; top:10px; left:14px; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted)}
+  .card.is-flipped .front{transform:rotateY(180deg)}
+  .card.is-flipped .back{transform:rotateY(360deg)}
+  .kicker{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#567267; text-align:center; margin-bottom:6px}
+  .story{font-size:20px;line-height:1.5;text-align:center; margin-top:6px}
+  .author{font-size:28px;font-weight:900;color:#23483a;text-align:center}
+  .hint{margin-top:14px}
+  .hint .btn{background: color-mix(in srgb, var(--primary) 10%, white); border-color: color-mix(in srgb, var(--primary) 25%, white);}
 
-  footer{margin-top:22px;text-align:center;color:#2f3b36}
-
-  @media(max-width:560px){
-    .face p{font-size:17px}
-    .logo{height:56px}
-  }
+  footer{margin-top:28px;text-align:center;color:#2f3b36}
 </style>
 </head>
 <body>
   <div class="wrap">
     <header>
       <img src="logo.png" alt="Olga & Oriol — 04.10.2025" class="logo" />
-      <div class="progress">
-        <div class="label"><span id="counter">0/0</span></div>
-        <div class="bar"><span id="bar"></span></div>
-      </div>
     </header>
 
-    <div class="controls">
-      <button class="btn icon" id="prev" title="Anterior">◀</button>
-      <button class="btn primary" id="next" title="Siguiente">Siguiente →</button>
-      <button class="btn icon" id="shuffle" title="Mezclar">🔀</button>
+    <div class="progress">
+      <div class="label"><span id="progressCount">0/0</span></div>
+      <div class="bar"><span id="progressBar"></span></div>
     </div>
 
-    <div class="stage">
-      <div class="card" id="card">
-        <div class="inner">
-          <div class="face front">
-            <div class="meta">Madrecdota · Frente</div>
-            <p id="quote">—</p>
-            <div class="hint" id="flipFront">↻ Girar</div>
-          </div>
-          <div class="face back">
-            <div class="meta">Autor/a</div>
-            <h1 id="author">—</h1>
-            <div class="hint" id="flipBack">↺ Volver</div>
-          </div>
-        </div>
-      </div>
+    <div class="controls">
+      <button id="prev" class="btn icon" aria-label="Anterior">◀</button>
+      <button id="next" class="btn primary">Siguiente →</button>
+      <button id="shuffle" class="btn icon" aria-label="Mezclar">🔀</button>
+    </div>
+
+    <div class="card" id="card">
+      <section class="face front" id="front">
+        <div class="kicker">Madrecdota</div>
+        <div class="story" id="frontText">Toca “Mezclar” para empezar.</div>
+        <div class="hint"><button class="btn" id="flipBtn1">⟳ Girar</button></div>
+      </section>
+      <section class="face back" id="back">
+        <div class="kicker">Autor/a</div>
+        <div class="author" id="author">—</div>
+        <div class="hint"><button class="btn" id="flipBtn2">⟳ Volver</button></div>
+      </section>
     </div>
 
     <footer>Hecho con ❤️ para Olga &amp; Oriol.</footer>
@@ -93,74 +86,66 @@
 
 <script>
 (function(){
-  // Anecdotas (revisadas y pulidas). Añade las tuyas aquí.
+  // Ejemplos. Sustituye por la lista completa cuando quieras.
   const ITEMS = [
-    { text:"Haciendo limpieza, una cucaracha “muerta” acabó en el recogedor. De repente echó a correr y mi madre, nerviosa, gritó: “¡Se ha corrido por todo el recogedor!”. Risas y asco a partes iguales.", author:"Javi" },
-    { text:"De pequeña confundí colonia con quitaesmalte y regué el salón con el bote. Mi madre dijo muy seria: “Huele a limpieza profunda”.", author:"Olga" },
-    { text:"Mi madre tiene tres alarmas para ‘regresar a casa’. A la tercera, siempre dice: “Ahora sí, me voy”. Dos horas después seguimos allí.", author:"Uri" },
-    { text:"En una receta: “Añade un chorrito”. Pregunté cuánto es un chorrito. Mi madre: “Lo justo para que no me juzgue tu abuela”.", author:"Andrea" },
-    { text:"Poniendo una foto familiar, mi madre: “Pon la que salgo peor, así os lucís vosotros”. La dejó de perfil durante meses.", author:"Núria" },
-    { text:"“No grites que me asustas”, me gritó mi madre desde la otra habitación.", author:"Javi" },
-    { text:"Cada vez que preguntan por la edad: “Veinticinco… con experiencia”.", author:"Mar" }
+    {t:"De pequeña confundí colonia con quitaesmalte y rocié el salón. Mi madre, seria: «Huele a limpieza profunda».", a:"Javi"},
+    {t:"Haciendo limpieza, una cucaracha 'muerta' acabó en el recogedor. De repente echó a correr y mi madre gritó: «¡Se ha corrido por todo el recogedor!».", a:"Javi"},
+    {t:"Mi madre guardó el termómetro de mercurio junto a los bolígrafos. Adivina qué usé para 'subrayar'.", a:"Uri"},
+    {t:"Al pedirle una receta, dijo: «Echas un chorrito así» y volcó media botella. «¡Eso es un chorrazo!».", a:"Olga"},
+    {t:"Quiso programar el horno. Detuvo el reloj de pared y dijo: «Ya está, lo enciendo a las seis».", a:"Laia"}
   ];
 
-  let index = 0;
-  const seen = new Set(); // para progreso de mostradas
+  let order = [...Array(ITEMS.length).keys()];
+  let idx = 0;
 
-  const $ = (q)=>document.querySelector(q);
-  const card = $("#card");
-  const quote = $("#quote");
-  const author = $("#author");
-  const counter = $("#counter");
-  const bar = $("#bar");
+  const els = {
+    bar: document.getElementById('progressBar'),
+    count: document.getElementById('progressCount'),
+    frontText: document.getElementById('frontText'),
+    author: document.getElementById('author'),
+    card: document.getElementById('card'),
+    prev: document.getElementById('prev'),
+    next: document.getElementById('next'),
+    shuffle: document.getElementById('shuffle'),
+    flip1: document.getElementById('flipBtn1'),
+    flip2: document.getElementById('flipBtn2')
+  };
 
-  function updateCounter(){
-    const shown = seen.size;
-    const total = ITEMS.length;
-    counter.textContent = `${Math.min(shown, total)}/${total}`;
-    bar.style.width = `${(shown/total)*100}%`;
+  function updateProgress(){
+    const shown = Math.min(idx+1, order.length);
+    els.count.textContent = `${shown}/${order.length}`;
+    els.bar.style.width = `${(shown/order.length)*100}%`;
   }
 
-  function render(i){
-    const item = ITEMS[i];
-    if(!item) return;
-    quote.textContent = item.text;
-    author.textContent = item.author;
-    card.classList.remove("flipped");
-    seen.add(i);
-    updateCounter();
+  function render(){
+    const item = ITEMS[order[idx]];
+    els.frontText.textContent = item.t;
+    els.author.textContent = item.a;
+    updateProgress();
   }
 
-  function next(){
-    index = (index + 1) % ITEMS.length;
-    render(index);
-  }
-  function prev(){
-    index = (index - 1 + ITEMS.length) % ITEMS.length;
-    render(index);
-  }
+  function flip(){ els.card.classList.toggle('is-flipped'); }
+
   function shuffle(){
-    index = Math.floor(Math.random() * ITEMS.length);
-    render(index);
+    // Fisher-Yates
+    for(let i=order.length-1;i>0;i--){
+      const j = Math.floor(Math.random()*(i+1));
+      [order[i],order[j]]=[order[j],order[i]];
+    }
+    idx = 0;
+    els.card.classList.remove('is-flipped');
+    render();
   }
 
-  // Eventos
-  $("#next").addEventListener("click", next);
-  $("#prev").addEventListener("click", prev);
-  $("#shuffle").addEventListener("click", shuffle);
-
-  $("#flipFront").addEventListener("click", ()=>card.classList.add("flipped"));
-  $("#flipBack").addEventListener("click", ()=>card.classList.remove("flipped"));
-  card.addEventListener("click", (e)=>{
-    // si pulsa en zonas vacías de la tarjeta, también girar
-    if(e.target.classList.contains('face') || e.target.id==='card'){ 
-      card.classList.toggle("flipped");
-    }
-  });
+  els.prev.onclick = ()=>{ if(idx>0){ idx--; els.card.classList.remove('is-flipped'); render(); } };
+  els.next.onclick = ()=>{ if(idx<order.length-1){ idx++; els.card.classList.remove('is-flipped'); render(); } };
+  els.shuffle.onclick = shuffle;
+  els.flip1.onclick = flip;
+  els.flip2.onclick = flip;
+  els.card.addEventListener('click', flip);
 
   // init
-  updateCounter();
-  render(index);
+  if(order.length){ render(); }
 })();
 </script>
 </body>
