@@ -10,35 +10,43 @@
     --card:#ffffff;
     --muted:#6c7a72;
     --primary:#2f6f5e;
-    --pill:#e6efe9;
     --border:#e7e3dd;
     --shadow: 0 6px 16px rgba(0,0,0,.06);
     --radius:16px;
-    --accent:#2f6f5e;
   }
   *{box-sizing:border-box}
-  html,body{margin:0;background:var(--bg);color:#2a2a2a;font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif}
+  html,body{margin:0;background:var(--bg);color:#2a2a2a;
+    font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif}
   .wrap{max-width:980px;margin:0 auto;padding:20px 16px 28px}
-  header{display:flex;flex-direction:column;align-items:center;gap:12px;margin-top:4px;margin-bottom:10px}
+  header{display:flex;flex-direction:column;align-items:center;gap:12px;
+    margin-top:4px;margin-bottom:10px}
   .logo{height:76px;width:auto;display:block}
-  /* progress */
-  .progress{width:100%;max-width:560px;margin:2px auto 8px}
-  .progress .label{display:flex;justify-content:center;gap:10px;font-size:14px;color:var(--muted);margin:6px 4px}
+  .progress{width:100%;max-width:560px;margin:2px auto 12px}
+  .progress .label{display:flex;justify-content:center;gap:10px;font-size:14px;
+    color:var(--muted);margin:6px 4px}
   .bar{height:8px;background:#e9ecec;border-radius:999px;overflow:hidden}
-  .bar > span{display:block;height:100%;width:0;background: color-mix(in srgb, var(--primary) 45%, white); border-radius:999px; transition:width .35s ease}
-  /* controls */
-  .controls{display:flex;gap:12px;justify-content:center;align-items:center;margin:10px 0 14px}
-  .btn{border:none;border-radius:999px;padding:12px 18px;font-weight:700;cursor:pointer}
+  .bar > span{display:block;height:100%;width:0;
+    background: color-mix(in srgb, var(--primary) 45%, white);
+    border-radius:999px; transition:width .35s ease}
+  .controls{display:flex;gap:12px;justify-content:center;align-items:center;
+    margin:10px 0 14px}
+  .btn{border:none;border-radius:999px;padding:12px 18px;font-weight:700;
+    cursor:pointer}
   .btn.primary{background:var(--primary);color:#fff;padding:14px 22px}
-  .iconbtn{width:46px;height:46px;border:1px solid var(--border);border-radius:999px;background:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:18px;cursor:pointer}
+  .iconbtn{width:46px;height:46px;border:1px solid var(--border);
+    border-radius:999px;background:#fff;display:inline-flex;
+    align-items:center;justify-content:center;font-size:18px;cursor:pointer}
   .iconbtn:disabled{opacity:.4;cursor:not-allowed}
-  /* card */
-  .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px 18px 22px;max-width:720px;margin:0 auto;cursor:pointer;transition:transform .06s ease}
+  .card{background:var(--card);border:1px solid var(--border);
+    border-radius:var(--radius);box-shadow:var(--shadow);
+    padding:22px;max-width:720px;margin:0 auto;cursor:pointer;
+    transition:transform .06s ease}
   .card:hover{transform:translateY(-2px)}
-  .eyebrow{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:#5a6c66;text-align:center;margin:2px 0 10px}
-  .anec{margin:0 auto;text-align:center;line-height:1.5;font-size:22px;max-width:56ch}
-  .helper{color:var(--muted);font-size:13px;text-align:center;margin-top:8px}
-  footer{margin-top:20px;text-align:center;color:#2f3b36}
+  .eyebrow{font-size:13px;letter-spacing:.12em;text-transform:uppercase;
+    color:#5a6c66;text-align:center;margin:2px 0 14px}
+  .anec{margin:0 auto;text-align:center;line-height:1.5;font-size:22px;
+    max-width:56ch}
+  footer{margin-top:24px;text-align:center;color:#2f3b36}
   @media(min-width:720px){ .anec{font-size:24px} }
 </style>
 </head>
@@ -60,8 +68,7 @@
 
     <article id="card" class="card" role="button" aria-pressed="false" aria-live="polite">
       <div class="eyebrow" id="eyebrow">Madrecdota</div>
-      <p class="anec" id="text">Toca para ver una madrecdota.</p>
-      <div class="helper">Toca la tarjeta para ver el autor</div>
+      <p class="anec" id="text">Haz clic para ver una madrecdota.</p>
     </article>
 
     <footer>Hecho con ❤️ para Olga &amp; Oriol.</footer>
@@ -70,13 +77,10 @@
 <script>
 (function(){
   const anecdotes = [
-    { t: "Haciendo limpieza, una cucaracha 'muerta' acabó en el recogedor. De repente echó a correr y mi madre gritó: «¡Se ha corrido por todo el recogedor!».", a: "Javi" },
-    { t: "De pequeña confundí colonia con quitaesmalte y rocié el salón. Mi madre, seria: «Huele a limpieza profunda».", a: "Javi" },
-    { t: "Tras limpiar el suelo, mamá advirtió: «No pises, que está fregado con amor propio».", a: "Mai" },
-    { t: "Mi madre intentó usar Siri… y terminó regañando a la calculadora.", a: "Kevin" },
-    { t: "Quiso hacer pan de plátano. Hizo puré de plátano. Dos veces.", a: "Uri" },
-    { t: "Mandó un audio de dos minutos sin darse cuenta de que estaba cantando la canción equivocada.", a: "Olga" },
-    { t: "Se quedó dormida viendo su serie. Despertó y dijo: «¡No me contéis el final!». Íbamos por el capítulo uno.", a: "Kevin" }
+    { t: "La primera y única vez que mi madre llevó un barco, enredó la cuerda de esquiar en la hélice. Nos quedamos varados en alta mar y tuvimos que pedir un cuchillo a otra embarcación.", a: "Kevin" },
+    { t: "De niños, una amiga de mi madre le pidió recoger a su hijo y llevarlo a casa. En el trayecto se dio cuenta de que se lo había olvidado. Volvimos, y estaba acurrucado en las escaleras esperando.", a: "Kevin" },
+    { t: "Mi madre siempre ha sido la más dura y con más sentido común. Una vez metieron a mi primo en la cárcel, y fue ella quien fue a recogerlo para echarle la bronca. Otra vez, en Mallorca, plantó cara a unos turistas borrachos que molestaban y nos rescató.", a: "Kevin" },
+    { t: "Mi madre salió en una película de Berlanga Junior que se estrenó en cines e interactuó con el actor que hacía de Amador en *La que se avecina*.", a: "Voro" }
   ];
 
   let idx = 0;
