@@ -2,8 +2,8 @@
 <html lang="es">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Madrecdotas — Olga & Oriol</title>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Olga & Oriol — Madrecdotas</title>
 <style>
   :root{
     --bg:#f6f4f2;
@@ -14,45 +14,32 @@
     --border:#e7e3dd;
     --shadow: 0 6px 16px rgba(0,0,0,.06);
     --radius:16px;
+    --accent:#2f6f5e;
   }
   *{box-sizing:border-box}
   html,body{margin:0;background:var(--bg);color:#2a2a2a;font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif}
   .wrap{max-width:980px;margin:0 auto;padding:20px 16px 28px}
-
-  /* Header */
-  header{display:flex;flex-direction:column;align-items:center;gap:14px;margin-top:6px;margin-bottom:8px}
-  .logo{height:92px; width:auto; display:block}
-
-  /* Progress */
-  .hud{display:flex; flex-direction:column; align-items:center; gap:8px; margin: 2px 0 8px}
-  .count{font-weight:800; letter-spacing:.04em; opacity:.9}
-  .bar{height:10px;background:#e9ecec;border-radius:999px;overflow:hidden;width:100%;max-width:560px}
+  header{display:flex;flex-direction:column;align-items:center;gap:12px;margin-top:4px;margin-bottom:10px}
+  .logo{height:76px;width:auto;display:block}
+  /* progress */
+  .progress{width:100%;max-width:560px;margin:2px auto 8px}
+  .progress .label{display:flex;justify-content:center;gap:10px;font-size:14px;color:var(--muted);margin:6px 4px}
+  .bar{height:8px;background:#e9ecec;border-radius:999px;overflow:hidden}
   .bar > span{display:block;height:100%;width:0;background: color-mix(in srgb, var(--primary) 45%, white); border-radius:999px; transition:width .35s ease}
-
-  /* Controls */
-  .controls{display:flex; gap:12px; justify-content:center; align-items:center; margin: 12px 0 18px; flex-wrap:wrap}
-  .btn{border:none;border-radius:999px;padding:12px 18px;font-weight:800;cursor:pointer}
-  .btn.primary{background:var(--primary);color:#fff}
-  .btn.ghost{background:#fff;border:1px solid var(--border);}
-  .round{width:48px; height:48px; border-radius:999px; display:inline-flex; align-items:center; justify-content:center; border:1px solid var(--border); background:#fff}
-  .round:disabled,.btn:disabled{opacity:.5; cursor:not-allowed}
-
-  /* Card */
-  .stage{display:flex; justify-content:center; margin-top:6px}
-  .card{background:var(--card); border:1px solid var(--border); border-radius:var(--radius);
-        box-shadow:var(--shadow); width: min(720px, 94vw); padding:20px 20px 22px; cursor:pointer;}
-  .card h3{margin:4px 0 12px; text-align:center; font-size:14px; letter-spacing:.18em; color:#50635b;}
-  .text{font-size:22px; line-height:1.35; text-align:center; margin: 8px 4px 16px;}
-  .author{font-size:28px; text-align:center; font-weight:900; color:#2e4b3d; margin: 20px 0 6px}
-  .hint{font-size:12px; text-align:center; color:var(--muted); margin-top:6px}
-
-  footer{margin-top:26px;text-align:center;color:#2f3b36}
-  @media(max-width:560px){
-    .btn{padding:11px 16px}
-    .text{font-size:21px}
-    .author{font-size:26px}
-    .card{padding:18px 18px 20px}
-  }
+  /* controls */
+  .controls{display:flex;gap:12px;justify-content:center;align-items:center;margin:10px 0 14px}
+  .btn{border:none;border-radius:999px;padding:12px 18px;font-weight:700;cursor:pointer}
+  .btn.primary{background:var(--primary);color:#fff;padding:14px 22px}
+  .iconbtn{width:46px;height:46px;border:1px solid var(--border);border-radius:999px;background:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:18px;cursor:pointer}
+  .iconbtn:disabled{opacity:.4;cursor:not-allowed}
+  /* card */
+  .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px 18px 22px;max-width:720px;margin:0 auto;cursor:pointer;transition:transform .06s ease}
+  .card:hover{transform:translateY(-2px)}
+  .eyebrow{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:#5a6c66;text-align:center;margin:2px 0 10px}
+  .anec{margin:0 auto;text-align:center;line-height:1.5;font-size:22px;max-width:56ch}
+  .helper{color:var(--muted);font-size:13px;text-align:center;margin-top:8px}
+  footer{margin-top:20px;text-align:center;color:#2f3b36}
+  @media(min-width:720px){ .anec{font-size:24px} }
 </style>
 </head>
 <body>
@@ -61,108 +48,76 @@
       <img src="logo.png" alt="Olga & Oriol — 04.10.2025" class="logo" />
     </header>
 
-    <div class="hud">
-      <div class="count"><span id="idx">1</span>/<span id="total">0</span></div>
-      <div class="bar"><span id="progress"></span></div>
+    <div class="progress">
+      <div class="label"><span id="counter">0/0</span></div>
+      <div class="bar"><span id="barFill"></span></div>
     </div>
 
     <div class="controls">
-      <button class="round" id="prev" title="Anterior">◀</button>
-      <button class="btn primary" id="next">Siguiente →</button>
-      <button class="round" id="shuffle" title="Mezclar">🔀</button>
-      <button class="btn ghost" id="reset">Reset</button>
+      <button id="prevBtn" class="iconbtn" aria-label="Anterior">◀</button>
+      <button id="nextBtn" class="btn primary">Siguiente →</button>
     </div>
 
-    <div class="stage">
-      <article class="card" id="card">
-        <h3 id="label">MADRECDOTA</h3>
-        <div class="text" id="body"></div>
-        <div class="author" id="author" style="display:none"></div>
-        <div class="hint" id="hint">Toca la tarjeta para ver al autor</div>
-      </article>
-    </div>
+    <article id="card" class="card" role="button" aria-pressed="false" aria-live="polite">
+      <div class="eyebrow" id="eyebrow">Madrecdota</div>
+      <p class="anec" id="text">Toca para ver una madrecdota.</p>
+      <div class="helper">Toca la tarjeta para ver el autor</div>
+    </article>
 
     <footer>Hecho con ❤️ para Olga &amp; Oriol.</footer>
   </div>
 
 <script>
-// --- Datos ---
-const DATA = [
-  { t: "En casa estábamos viendo la tele y mi padre puso una película de 'Destino Final'. Justo salió la escena de una gimnasta que muere de forma absurda. Mi padre, mi hermano y yo empezamos a reírnos… hasta que vimos que mi madre lloraba, impactada. Entonces nos reímos aún más… ¡pero de ella!", a: "Jessica" },
-  { t: "Mi madre se apuntó a un curso de aromaterapia. Ahora tenemos una destiladora y hace esencias en casa. Parece un laboratorio de metanfetaminas.", a: "Roger" },
-  { t: "A los 4 años, esquiando con mi madre, le pedí que me soltara porque podía solo. Al instante me caí de culo y llorando le grité: «¡¿Por qué me sueltas?!».", a: "Roger" },
-  { t: "De pequeño inventé un idioma y mi familia me pedía palabras. Cuando me preguntaron cómo se decía 'bruja', respondí con el nombre de mi madre.", a: "Roger" },
-  { t: "En un viaje a Nueva York, al entrar al avión una azafata le dijo 'welcome' a mi madre. Ella contestó muy segura: 'welcome'. Todo el viaje mi hermano y yo nos dedicamos a saludar así a desconocidos.", a: "Javi" },
-  { t: "Una vez, limpiando un trastero, una cucaracha 'muerta' empezó a correr. Mi madre, nerviosa, gritó: «¡Se ha corrido por todo el recogedor!». Lloramos de la risa.", a: "Javi" },
-  { t: "Mi padre, mi hermano y yo sabíamos que molestar a mi madre en la mesa podía acabar con un vaso de agua encima. El que no lo sabía era el marido de la madrastra de mi hermano, que pasó la comida con comentarios machistas. Al final mi madre le tiró un vaso de agua a la cara. Una escena digna de 'Cuéntame'.", a: "Javi" },
-  { t: "Siempre nos confunden por teléfono: dicen que mi madre y yo tenemos la misma voz. Cuando llamaba mi abuela o sus amigas, siempre me confundían con ella.", a: "Gemma" },
-  { t: "Volví de un viaje el Día de los Inocentes. Llamé a mi madre diciendo que había perdido el pasaporte y solo podía volver pagando un pasaporte exprés carísimo. Después de una bronca enorme… aceptó pagarlo.", a: "Silvia" },
-  { t: "Es tan ordenada que los álbumes de fotos tienen etiquetas y hasta un índice para consultar qué año y evento corresponde a cada álbum.", a: "Silvia" },
-  { t: "En la ESO hice aerobic y en el festival final mis padres me grabaron… ¡pero a otra chica!", a: "Silvia" },
-  { t: "De niña, mi tío asustaba a mi madre gritándole: «¡Que viene la Castaña!». No era nada en concreto, pero le daba muchísimo miedo.", a: "Bela" },
-  { t: "Hasta hace poco en mi casa todos decíamos 'triquismiquis' porque mi madre pensaba que era lo correcto.", a: "Bela" },
-  { t: "Un día, entre bromas, alguien dijo mal 'corramos un estúpido velo' en vez de 'tupido velo'. Desde entonces toda la familia lo repite así.", a: "Bela" },
-  { t: "Cuando era pequeña, mi madre me hacía jugar a 'la crítica': caminábamos por la calle criticando a la gente mal vestida.", a: "Maria" },
-  { t: "Cuando me lié con mi crush de infancia, nada más irse lo llamé y jugué con mi madre al 'Quién es quién' para que adivinara quién era.", a: "Maria" },
-  { t: "En pandemia cocinamos juntas arroz con leche, el postre favorito de mi padre. Lo hicimos tan mal que estuvo una semana enfermo.", a: "Maria" }
-];
+(function(){
+  const anecdotes = [
+    { t: "Haciendo limpieza, una cucaracha 'muerta' acabó en el recogedor. De repente echó a correr y mi madre gritó: «¡Se ha corrido por todo el recogedor!».", a: "Javi" },
+    { t: "De pequeña confundí colonia con quitaesmalte y rocié el salón. Mi madre, seria: «Huele a limpieza profunda».", a: "Javi" },
+    { t: "Tras limpiar el suelo, mamá advirtió: «No pises, que está fregado con amor propio».", a: "Mai" },
+    { t: "Mi madre intentó usar Siri… y terminó regañando a la calculadora.", a: "Kevin" },
+    { t: "Quiso hacer pan de plátano. Hizo puré de plátano. Dos veces.", a: "Uri" },
+    { t: "Mandó un audio de dos minutos sin darse cuenta de que estaba cantando la canción equivocada.", a: "Olga" },
+    { t: "Se quedó dormida viendo su serie. Despertó y dijo: «¡No me contéis el final!». Íbamos por el capítulo uno.", a: "Kevin" }
+  ];
 
-// --- Estado ---
-let order = DATA.map((_,i)=>i);
-let cur = 0;
-let isBack = false;
+  let idx = 0;
+  let flipped = false;
 
-// --- Helpers UI ---
-const card = document.getElementById('card');
-const body = document.getElementById('body');
-const author = document.getElementById('author');
-const label = document.getElementById('label');
-const hint = document.getElementById('hint');
-const idxEl = document.getElementById('idx');
-const totalEl = document.getElementById('total');
-const progress = document.getElementById('progress');
-const btnPrev = document.getElementById('prev');
-const btnNext = document.getElementById('next');
-const btnShuffle = document.getElementById('shuffle');
-const btnReset = document.getElementById('reset');
+  const card = document.getElementById('card');
+  const text = document.getElementById('text');
+  const eyebrow = document.getElementById('eyebrow');
+  const counter = document.getElementById('counter');
+  const barFill = document.getElementById('barFill');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
 
-function render(){
-  const item = DATA[order[cur]];
-  totalEl.textContent = DATA.length;
-  idxEl.textContent = (cur+1);
-  progress.style.width = ((cur)/(DATA.length-1 || 1))*100 + '%';
-  btnPrev.disabled = cur===0;
-  btnNext.disabled = cur===DATA.length-1;
-  label.textContent = "MADRECDOTA";
-  if(!isBack){
-    body.textContent = item.t;
-    author.style.display = 'none';
-    hint.textContent = 'Toca la tarjeta para ver al autor';
-  }else{
-    body.textContent = '';
-    author.textContent = item.a;
-    author.style.display = 'block';
-    hint.textContent = 'Toca la tarjeta para volver';
+  function updateProgress(){
+    counter.textContent = (idx+1) + '/' + anecdotes.length;
+    barFill.style.width = (((idx+1)/anecdotes.length)*100) + '%';
+    prevBtn.disabled = (idx===0);
   }
-}
 
-function shuffle(){
-  for(let i=order.length-1;i>0;i--){
-    const j = Math.floor(Math.random()*(i+1));
-    [order[i],order[j]] = [order[j],order[i]];
+  function render(){
+    const item = anecdotes[idx];
+    if(!flipped){
+      eyebrow.textContent = 'Madrecdota';
+      text.textContent = item.t;
+    }else{
+      eyebrow.textContent = 'Autor/a';
+      text.textContent = item.a;
+    }
+    updateProgress();
   }
-  cur = 0; isBack = false; render();
-}
 
-// --- Eventos ---
-card.addEventListener('click', ()=>{ isBack = !isBack; render(); });
-btnPrev.addEventListener('click', ()=>{ if(cur>0){ cur--; isBack=false; render(); }});
-btnNext.addEventListener('click', ()=>{ if(cur<DATA.length-1){ cur++; isBack=false; render(); }});
-btnShuffle.addEventListener('click', shuffle);
-btnReset.addEventListener('click', ()=>{ cur=0; isBack=false; order = DATA.map((_,i)=>i); render(); });
+  function flip(){ flipped = !flipped; render(); }
+  function next(){ if(idx < anecdotes.length-1){ idx++; } else { idx = 0; } flipped = false; render(); }
+  function prev(){ if(idx > 0){ idx--; } else { idx = anecdotes.length-1; } flipped = false; render(); }
 
-// Inicializar
-render();
+  card.addEventListener('click', flip);
+  nextBtn.addEventListener('click', next);
+  prevBtn.addEventListener('click', prev);
+
+  render();
+})();
 </script>
 </body>
 </html>
