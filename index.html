@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Madrecdotas — Olga & Oriol</title>
 <style>
   :root{
@@ -17,38 +17,42 @@
   }
   *{box-sizing:border-box}
   html,body{margin:0;background:var(--bg);color:#2a2a2a;font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif}
-  .wrap{max-width:880px;margin:0 auto;padding:20px 16px 28px}
+  .wrap{max-width:980px;margin:0 auto;padding:20px 16px 28px}
 
   /* Header */
-  header{display:flex;flex-direction:column;align-items:center;gap:12px;margin-top:4px;margin-bottom:8px}
-  .logo{height:88px; width:auto; display:block}
+  header{display:flex;flex-direction:column;align-items:center;gap:14px;margin-top:6px;margin-bottom:8px}
+  .logo{height:92px; width:auto; display:block}
 
   /* Progress */
-  .progress{width:100%;max-width:560px;margin:0 auto 10px}
-  .progress .label{display:flex;justify-content:center; gap:14px; font-size:13px; color:var(--muted); margin:8px 4px}
-  .bar{height:8px;background:#e9ecec;border-radius:999px;overflow:hidden}
+  .hud{display:flex; flex-direction:column; align-items:center; gap:8px; margin: 2px 0 8px}
+  .count{font-weight:800; letter-spacing:.04em; opacity:.9}
+  .bar{height:10px;background:#e9ecec;border-radius:999px;overflow:hidden;width:100%;max-width:560px}
   .bar > span{display:block;height:100%;width:0;background: color-mix(in srgb, var(--primary) 45%, white); border-radius:999px; transition:width .35s ease}
 
   /* Controls */
-  .controls{display:flex;gap:12px;justify-content:center;margin:14px 0 16px; flex-wrap:wrap}
-  .btn{border:none;border-radius:999px;padding:12px 18px;font-weight:800;cursor:pointer;box-shadow:var(--shadow); background:#fff; border:1px solid var(--border);}
-  .btn.primary{background:var(--primary); color:#fff; border-color:transparent}
-  .btn.icon{padding:12px 14px}
-  .btn:disabled{opacity:.6;cursor:not-allowed}
+  .controls{display:flex; gap:12px; justify-content:center; align-items:center; margin: 12px 0 18px; flex-wrap:wrap}
+  .btn{border:none;border-radius:999px;padding:12px 18px;font-weight:800;cursor:pointer}
+  .btn.primary{background:var(--primary);color:#fff}
+  .btn.ghost{background:#fff;border:1px solid var(--border);}
+  .round{width:48px; height:48px; border-radius:999px; display:inline-flex; align-items:center; justify-content:center; border:1px solid var(--border); background:#fff}
+  .round:disabled,.btn:disabled{opacity:.5; cursor:not-allowed}
 
   /* Card */
-  .card{position:relative;perspective:1200px;margin:0 auto;max-width:720px;min-height:260px}
-  .face{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px 22px 26px;position:absolute;inset:0;backface-visibility:hidden;transform-style:preserve-3d;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px}
-  .back{transform:rotateY(180deg)}
-  .card.is-flipped .front{transform:rotateY(180deg)}
-  .card.is-flipped .back{transform:rotateY(360deg)}
-  .kicker{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#567267; text-align:center; margin-bottom:6px}
-  .story{font-size:20px;line-height:1.5;text-align:center; margin-top:6px}
-  .author{font-size:28px;font-weight:900;color:#23483a;text-align:center}
-  .hint{margin-top:14px}
-  .hint .btn{background: color-mix(in srgb, var(--primary) 10%, white); border-color: color-mix(in srgb, var(--primary) 25%, white);}
+  .stage{display:flex; justify-content:center; margin-top:6px}
+  .card{background:var(--card); border:1px solid var(--border); border-radius:var(--radius);
+        box-shadow:var(--shadow); width: min(720px, 94vw); padding:20px 20px 22px; cursor:pointer;}
+  .card h3{margin:4px 0 12px; text-align:center; font-size:14px; letter-spacing:.18em; color:#50635b;}
+  .text{font-size:22px; line-height:1.35; text-align:center; margin: 8px 4px 16px;}
+  .author{font-size:28px; text-align:center; font-weight:900; color:#2e4b3d; margin: 20px 0 6px}
+  .hint{font-size:12px; text-align:center; color:var(--muted); margin-top:6px}
 
-  footer{margin-top:28px;text-align:center;color:#2f3b36}
+  footer{margin-top:26px;text-align:center;color:#2f3b36}
+  @media(max-width:560px){
+    .btn{padding:11px 16px}
+    .text{font-size:21px}
+    .author{font-size:26px}
+    .card{padding:18px 18px 20px}
+  }
 </style>
 </head>
 <body>
@@ -57,96 +61,95 @@
       <img src="logo.png" alt="Olga & Oriol — 04.10.2025" class="logo" />
     </header>
 
-    <div class="progress">
-      <div class="label"><span id="progressCount">0/0</span></div>
-      <div class="bar"><span id="progressBar"></span></div>
+    <div class="hud">
+      <div class="count"><span id="idx">1</span>/<span id="total">0</span></div>
+      <div class="bar"><span id="progress"></span></div>
     </div>
 
     <div class="controls">
-      <button id="prev" class="btn icon" aria-label="Anterior">◀</button>
-      <button id="next" class="btn primary">Siguiente →</button>
-      <button id="shuffle" class="btn icon" aria-label="Mezclar">🔀</button>
+      <button class="round" id="prev" title="Anterior">◀</button>
+      <button class="btn primary" id="next">Siguiente →</button>
+      <button class="round" id="shuffle" title="Mezclar">🔀</button>
+      <button class="btn ghost" id="reset">Reset</button>
     </div>
 
-    <div class="card" id="card">
-      <section class="face front" id="front">
-        <div class="kicker">Madrecdota</div>
-        <div class="story" id="frontText">Toca “Mezclar” para empezar.</div>
-        <div class="hint"><button class="btn" id="flipBtn1">⟳ Girar</button></div>
-      </section>
-      <section class="face back" id="back">
-        <div class="kicker">Autor/a</div>
-        <div class="author" id="author">—</div>
-        <div class="hint"><button class="btn" id="flipBtn2">⟳ Volver</button></div>
-      </section>
+    <div class="stage">
+      <article class="card" id="card">
+        <h3 id="label">MADRECDOTA</h3>
+        <div class="text" id="body"></div>
+        <div class="author" id="author" style="display:none"></div>
+        <div class="hint" id="hint">Toca la tarjeta para ver al autor</div>
+      </article>
     </div>
 
     <footer>Hecho con ❤️ para Olga &amp; Oriol.</footer>
   </div>
 
 <script>
-(function(){
-  // Ejemplos. Sustituye por la lista completa cuando quieras.
-  const ITEMS = [
-    {t:"De pequeña confundí colonia con quitaesmalte y rocié el salón. Mi madre, seria: «Huele a limpieza profunda».", a:"Javi"},
-    {t:"Haciendo limpieza, una cucaracha 'muerta' acabó en el recogedor. De repente echó a correr y mi madre gritó: «¡Se ha corrido por todo el recogedor!».", a:"Javi"},
-    {t:"Mi madre guardó el termómetro de mercurio junto a los bolígrafos. Adivina qué usé para 'subrayar'.", a:"Uri"},
-    {t:"Al pedirle una receta, dijo: «Echas un chorrito así» y volcó media botella. «¡Eso es un chorrazo!».", a:"Olga"},
-    {t:"Quiso programar el horno. Detuvo el reloj de pared y dijo: «Ya está, lo enciendo a las seis».", a:"Laia"}
-  ];
+// --- Datos (puedes ampliar libremente) ---
+const DATA = [
+  { t: "De pequeña confundí colonia con quitaesmalte y rocié el salón. Mi madre, seria: «Huele a limpieza profunda».", a: "Anónimo" },
+  { t: "Haciendo limpieza, una cucaracha 'muerta' acabó en el recogedor. De pronto echó a correr y mi madre gritó: «¡Se ha corrido por todo el recogedor!».", a: "Javi" },
+  { t: "En plena visita al médico, mi madre contestó al '¿alergias?' con: «A las tareas no hechas». Silencio. Risas después.", a: "Anónimo" },
+  { t: "Mi madre decía 'cierra la luz'. Un día la puerta se cerró sola. «Eso sí que es eficiencia», remató.", a: "Anónimo" }
+];
 
-  let order = [...Array(ITEMS.length).keys()];
-  let idx = 0;
+// --- Estado ---
+let order = DATA.map((_,i)=>i);
+let cur = 0;
+let isBack = false;
 
-  const els = {
-    bar: document.getElementById('progressBar'),
-    count: document.getElementById('progressCount'),
-    frontText: document.getElementById('frontText'),
-    author: document.getElementById('author'),
-    card: document.getElementById('card'),
-    prev: document.getElementById('prev'),
-    next: document.getElementById('next'),
-    shuffle: document.getElementById('shuffle'),
-    flip1: document.getElementById('flipBtn1'),
-    flip2: document.getElementById('flipBtn2')
-  };
+// --- Helpers UI ---
+const card = document.getElementById('card');
+const body = document.getElementById('body');
+const author = document.getElementById('author');
+const label = document.getElementById('label');
+const hint = document.getElementById('hint');
+const idxEl = document.getElementById('idx');
+const totalEl = document.getElementById('total');
+const progress = document.getElementById('progress');
+const btnPrev = document.getElementById('prev');
+const btnNext = document.getElementById('next');
+const btnShuffle = document.getElementById('shuffle');
+const btnReset = document.getElementById('reset');
 
-  function updateProgress(){
-    const shown = Math.min(idx+1, order.length);
-    els.count.textContent = `${shown}/${order.length}`;
-    els.bar.style.width = `${(shown/order.length)*100}%`;
+function render(){
+  const item = DATA[order[cur]];
+  totalEl.textContent = DATA.length;
+  idxEl.textContent = (cur+1);
+  progress.style.width = ((cur)/(DATA.length-1 || 1))*100 + '%';
+  btnPrev.disabled = cur===0;
+  btnNext.disabled = cur===DATA.length-1;
+  label.textContent = "MADRECDOTA";
+  if(!isBack){
+    body.textContent = item.t;
+    author.style.display = 'none';
+    hint.textContent = 'Toca la tarjeta para ver al autor';
+  }else{
+    body.textContent = '';
+    author.textContent = item.a;
+    author.style.display = 'block';
+    hint.textContent = 'Toca la tarjeta para volver';
   }
+}
 
-  function render(){
-    const item = ITEMS[order[idx]];
-    els.frontText.textContent = item.t;
-    els.author.textContent = item.a;
-    updateProgress();
+function shuffle(){
+  for(let i=order.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [order[i],order[j]] = [order[j],order[i]];
   }
+  cur = 0; isBack = false; render();
+}
 
-  function flip(){ els.card.classList.toggle('is-flipped'); }
+// --- Eventos ---
+card.addEventListener('click', ()=>{ isBack = !isBack; render(); });
+btnPrev.addEventListener('click', ()=>{ if(cur>0){ cur--; isBack=false; render(); }});
+btnNext.addEventListener('click', ()=>{ if(cur<DATA.length-1){ cur++; isBack=false; render(); }});
+btnShuffle.addEventListener('click', shuffle);
+btnReset.addEventListener('click', ()=>{ cur=0; isBack=false; order = DATA.map((_,i)=>i); render(); });
 
-  function shuffle(){
-    // Fisher-Yates
-    for(let i=order.length-1;i>0;i--){
-      const j = Math.floor(Math.random()*(i+1));
-      [order[i],order[j]]=[order[j],order[i]];
-    }
-    idx = 0;
-    els.card.classList.remove('is-flipped');
-    render();
-  }
-
-  els.prev.onclick = ()=>{ if(idx>0){ idx--; els.card.classList.remove('is-flipped'); render(); } };
-  els.next.onclick = ()=>{ if(idx<order.length-1){ idx++; els.card.classList.remove('is-flipped'); render(); } };
-  els.shuffle.onclick = shuffle;
-  els.flip1.onclick = flip;
-  els.flip2.onclick = flip;
-  els.card.addEventListener('click', flip);
-
-  // init
-  if(order.length){ render(); }
-})();
+// Inicializar
+render();
 </script>
 </body>
 </html>
